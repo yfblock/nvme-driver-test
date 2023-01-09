@@ -1,0 +1,28 @@
+[package]
+name = "os"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[profile.dev]
+panic = "abort"
+
+[profile.release]
+panic = "abort"
+
+[dependencies]
+nvme_driver = { path = "../nvme_driver" }
+fatfs = { version = "0.4.0", default-features = false, features = ["alloc", "lfn", "log_level_trace", "unicode"] }
+buddy_system_allocator = "0.9.0"
+virtio-drivers = "0.1.0"
+lazy_static = { version = "1.4", features = ["spin_no_std"] }
+spin = { version = "0.9.4", default-features = false, features = ["mutex", "lazy"]}
+futures-util = { version = "0.3.25", default-features = false, features = ["alloc"] }
+
+crossbeam-queue = { version = "0.3.8", default-features = false, features = ["alloc"] }
+conquer-once = { version = "0.3.2", default-features = false }
+
+[patch.crates-io]
+# fatfs = { git = "https://github.com/rafalh/rust-fatfs" }
+fatfs = { path = "./rust-fatfs" }
